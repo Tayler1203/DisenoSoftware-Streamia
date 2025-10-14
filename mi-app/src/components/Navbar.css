@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #141414;
   padding: 15px 40px;
   position: sticky;
   top: 0;
@@ -28,7 +27,7 @@
 }
 
 .navbar-links li:hover {
-  color: #ff4d4d;
+  color: #8b59ff;
 }
 
 .profile-avatar {
