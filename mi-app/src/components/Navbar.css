@@ -143,7 +143,6 @@
 .mic-btn { appearance: none; background: rgba(139,92,246,.18); color: #e9ddff; border: 1px solid rgba(139,92,246,.35); border-radius: 10px; padding: 6px 8px; cursor: pointer; }
 .mic-btn:hover { background: rgba(139,92,246,.3); }
 
-/* Panel de resultados (se mantiene) */
 .search-panel {
   position: absolute; top: calc(100% + 6px); left: 0; width: min(460px, 86vw);
   background: #141418; border: 1px solid rgba(255,255,255,.08); border-radius: 12px;
@@ -154,7 +153,6 @@
 .search-item img { width: 44px; height: 62px; object-fit: cover; border-radius: 6px; }
 .si-meta { display: grid; line-height: 1.15; } .si-title { font-weight: 700; } .si-sub { color: #c7c7cb; font-size: .85rem; }
 
-/* Modo búsqueda: expandir input a todo el header (sin tocar la marca) */
 .navbar.search-active .nav-menu { opacity: 0; pointer-events: none; transition: opacity .2s ease; }
 .navbar.search-active .nav-actions.hidden-when-search { opacity: 0; pointer-events: none; }
 
@@ -171,9 +169,8 @@
 }
 .nav-search.expanded.takeover .search-input { width: 100%; max-width: none; }
 
-/* Overlay que oscurece el resto de la página */
 .search-dim {
-  position: fixed; inset: var(--nav-height, 64px) 0 0 0;  /* debajo del navbar */
+  position: fixed; inset: var(--nav-height, 64px) 0 0 0; 
   background: rgba(0,0,0,.5);
   z-index: 85;
 }
@@ -187,3 +184,35 @@
 .si-sub { color: #c7c7cb; font-size: .85rem; }
 
 .avatar { border-radius: 999px; border: 1px solid rgba(255,255,255,.18); display: block; }
+
+/* Contenedor del input de búsqueda */
+.search-bar {
+  position: relative;
+  width: 500px;                  /* ancho normal */
+  transition: transform 0.4s ease, width 0.4s ease;
+  transform-origin: right center; /* pivote a la derecha para expandir hacia la izquierda */
+}
+
+/* Al enfocar el input */
+.search-bar:focus-within {
+  width: 650px;                  /* se expande */
+  transform: scaleX(1.05) translateX(-15px); /* animación sutil hacia la izquierda */
+}
+
+/* Input real */
+.search-bar input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.search-bar input:focus {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(139,92,246,0.6);
+}

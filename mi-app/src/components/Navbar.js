@@ -69,11 +69,45 @@ export default function Navbar() {
     inputRef.current?.focus();
   };
 
+// Dentro de VirtualKeyboard.js (useEffect si es React) — versión genérica
   useEffect(() => {
-    const onKey = (e) => { if (e.key === "Escape") closeKB(); };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    const root = document.querySelector('.vk');  // el contenedor del teclado
+    if (!root) return;
+
+    const onKeyDown = (e) => {
+      const keyEl = e.target.closest('.vk-key');
+      if (!keyEl) return;
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();               // evita scroll con espacio
+        keyEl.classList.add('pressed');   // efecto visual
+        keyEl.click();                    // dispara la acción existente
+      }
+    };
+
+    const onKeyUp = (e) => {
+      const keyEl = e.target.closest('.vk-key');
+      if (!keyEl) return;
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        keyEl.classList.remove('pressed');
+      }
+    };
+
+    const onBlur = (e) => {
+      e.target.classList?.remove('pressed');
+    };
+
+    root.addEventListener('keydown', onKeyDown);
+    root.addEventListener('keyup', onKeyUp);
+    root.addEventListener('blur', onBlur, true);
+
+    return () => {
+      root.removeEventListener('keydown', onKeyDown);
+      root.removeEventListener('keyup', onKeyUp);
+      root.removeEventListener('blur', onBlur, true);
+    };
   }, []);
+
 
   const scrollToItem = (id) => {
     const el = document.getElementById(`movie-${id}`);

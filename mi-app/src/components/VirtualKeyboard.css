@@ -1,16 +1,30 @@
 .vk {
   position: fixed;
   left: 0; right: 0;
-  top: var(--nav-height, 64px);        
-  z-index: 90;                           
-  background: rgba(18, 18, 22, .92);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  top: var(--nav-height, 64px);
+  z-index: 90;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
   border-top: 1px solid rgba(255,255,255,.08);
   padding: 16px 12px 22px;
   display: grid;
   justify-items: center;
 }
+
+.vk::before {
+  content: "";
+  position: fixed;
+  left: 0; right: 0;
+  top: var(--nav-height, 64px);
+  bottom: 0;               
+  background: rgba(18,18,22,.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: -1;
+}
+
 
 .vk-rows { width: min(1100px, 94vw); display: grid; gap: 12px; }
 .vk-row { display: flex; gap: 10px; justify-content: center; flex-wrap: nowrap; }
@@ -38,3 +52,134 @@
 .vk-key.primary { background: rgba(139,92,246,.45); border-color: rgba(139,92,246,.55); }
 .vk-key.primary:hover { background: rgba(139,92,246,.6); }
 .vk-key.primary:active { background: rgba(255, 255, 255, 0.5); }
+
+.vk-key{
+  opacity: 0;
+  transform: translateY(8px) scale(.965);
+  animation: vk-pop .38s cubic-bezier(.2,.8,.2,1) both;
+  animation-delay: var(--vk-start, .10s); 
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+@keyframes vk-pop{
+  0%   { opacity: 0; transform: translateY(8px)  scale(.965); }
+  60%  { opacity: 1; transform: translateY(-3px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+.vk-rows{ --vk-step: .02s; }          
+.vk-row{  --row-delay: 0s; }
+.vk-row:nth-child(2){ --row-delay: .06s; }  
+.vk-row:nth-child(3){ --row-delay: .12s; }
+.vk-row:nth-child(4){ --row-delay: .18s; }
+.vk-row:nth-child(5){ --row-delay: .24s; }
+.vk-row:nth-child(6){ --row-delay: .30s; } 
+
+.vk-row .vk-key:nth-child(1) { animation-delay: calc(var(--vk-start,.10s) + var(--row-delay) + var(--vk-step) * 0); }
+.vk-row .vk-key:nth-child(2) { animation-delay: calc(var(--vk-start,.10s) + var(--row-delay) + var(--vk-step) * 1); }
+.vk-row .vk-key:nth-child(3) { animation-delay: calc(var(--vk-start,.10s) + var(--row-delay) + var(--vk-step) * 2); }
+.vk-row .vk-key:nth-child(4) { animation-delay: calc(var(--vk-start,.10s) + var(--row-delay) + var(--vk-step) * 3); }
+.vk-row .vk-key:nth-child(5) { animation-delay: calc(var(--vk-start,.10s) + var(--row-delay) + var(--vk-step) * 4); }
+.vk-row .vk-key:nth-child(6) { animation-delay: calc(var(--vk-start,.10s) + var(--row-delay) + var(--vk-step) * 5); }
+.vk-row .vk-key:nth-child(7) { animation-delay: calc(var(--vk-start,.10s) + var(--row-delay) + var(--vk-step) * 6); }
+.vk-row .vk-key:nth-child(8) { animation-delay: calc(var(--vk-start,.10s) + var(--row-delay) + var(--vk-step) * 7); }
+.vk-row .vk-key:nth-child(9) { animation-delay: calc(var(--vk-start,.10s) + var(--row-delay) + var(--vk-step) * 8); }
+.vk-row .vk-key:nth-child(10){ animation-delay: calc(var(--vk-start,.10s) + var(--row-delay) + var(--vk-step) * 9); }
+.vk-row .vk-key:nth-child(11){ animation-delay: calc(var(--vk-start,.10s) + var(--row-delay) + var(--vk-step) * 10); }
+.vk-row .vk-key:nth-child(12){ animation-delay: calc(var(--vk-start,.10s) + var(--row-delay) + var(--vk-step) * 11); }
+
+/* 4) Respeto a accesibilidad: si el usuario prefiere menos animaciones */
+@media (prefers-reduced-motion: reduce){
+  .vk-key{ animation: none; opacity: 1; transform: none; }
+}
+
+/* estilo base */
+.vk-key {
+  position: relative;
+  transition: transform 0.08s ease, box-shadow 0.15s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* al presionar: se hunde */
+.vk-key:active,
+.vk-key.pressed {
+  transform: translateY(2px) scale(0.97);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.45);
+}
+
+/* resplandor al presionar */
+.vk-key:active::after,
+.vk-key.pressed::after {
+  content: "";
+  position: absolute;
+  inset: -2px; /* se expande un poco fuera del borde */
+  border-radius: inherit;
+  box-shadow: 0 0 10px 3px rgba(255,255,255,0.7);
+  opacity: 0;
+  animation: vk-glow 0.35s ease-out;
+  pointer-events: none;
+}
+
+@keyframes vk-glow {
+  0%   { opacity: 0.8; transform: scale(0.96); }
+  40%  { opacity: 1;   transform: scale(1.02); }
+  100% { opacity: 0;   transform: scale(1); }
+}
+
+
+
+
+/* Asegurá foco visible al navegar con Tab */
+.vk-key {
+  outline: none; /* quitamos el outline por defecto para aplicar uno custom */
+}
+
+/* Focus ring accesible (solo teclado) */
+.vk-key:focus-visible {
+  position: relative;
+  z-index: 1;
+}
+
+/* Halo blanco suave cuando tiene foco por teclado */
+.vk-key:focus-visible::before {
+  content: "";
+  position: absolute;
+  inset: -3px;                     /* un poco fuera del borde */
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.75),
+              0 0 12px 3px rgba(255,255,255,0.45);
+  pointer-events: none;
+}
+
+/* Mantén tu efecto “hundimiento + contorno brillante” al presionar */
+.vk-key:active,
+.vk-key.pressed {
+  transform: translateY(2px) scale(0.97);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.45);
+}
+
+/* Glow de activación (borde) al presionar — ya definido, lo reforzamos para teclado */
+.vk-key:active::after,
+.vk-key.pressed::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  box-shadow: 0 0 10px 3px rgba(255,255,255,0.7);
+  opacity: 0;
+  animation: vk-glow 0.35s ease-out;
+  pointer-events: none;
+}
+
+@keyframes vk-glow {
+  0%   { opacity: 0.8; transform: scale(0.96); }
+  40%  { opacity: 1;   transform: scale(1.02); }
+  100% { opacity: 0;   transform: scale(1); }
+}
+
+/* Respeto a prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce){
+  .vk-key { transition: none; }
+  .vk-key::before, .vk-key::after { animation: none; }
+}

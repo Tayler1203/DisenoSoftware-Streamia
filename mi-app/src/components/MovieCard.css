@@ -54,7 +54,6 @@
 .card:hover .card-title,
 .card:focus .card-title { transform: translateY(-1px); transition: transform .2s ease; }
 
-/* Responsive: más compactas en móviles */
 @media (max-width: 780px) {
   .card { width: 260px; min-width: 260px; border-radius: 14px; }
   .card-title { font-size: .95rem; }
