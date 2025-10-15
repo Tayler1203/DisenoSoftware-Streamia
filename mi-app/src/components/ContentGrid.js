@@ -1,23 +1,54 @@
-import React from "react";
-import "./ContentGrid.css";
+// src/components/ContentGrid.js
+import React, { useEffect, useState } from "react";
+import CarouselRow from "./CarouselRow";
+import "../ContentGrid.css";
+import { getCatalog } from "../lib/catalog";
 
-const mockData = [
-  { id: 1, title: "Breaking Stream"},
-  { id: 2, title: "Stream Wars"},
-  { id: 3, title: "The Streamer"},
-  { id: 4, title: "Flow Things"},
-];
+export default function ContentGrid() {
+  const [cats, setCats] = useState(null); // null = cargando
+  const [err, setErr]   = useState("");
+  
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const arr = await getCatalog();
+        if (!alive) return;
+        if (!arr || !arr.length) throw new Error("Catálogo vacío");
+        setCats(arr);
+      } catch {
+        setErr("No se pudo cargar el catálogo.");
+        setCats([]); // muestra mensaje y evita re-render raros
+      }
+    })();
+    return () => { alive = false; };
+  }, []);
 
-function ContentGrid() {
-  return (
-    <div className="grid-container">
-      {mockData.map((item) => (
-        <div key={item.id} className="card">
-          <h3 className="card-title">{item.title}</h3>
-        </div>
+  if (cats === null) {
+    return (
+      <div className="home">
+        {[1,2,3].map((r) => (
+          <section key={r} className="row">
+            <h2 className="row-title skeleton-title">Cargando...</h2>
+            <div className="row-wrap">
+              <div className="row-scroller">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="skeleton-card" aria-hidden="true" />
+                ))}
+              </div>
+            </div>
+          </section>
+        ))}
+      </div>
+    );
+  }
+
+return (
+    <div className="home">
+      {err && <p style={{color:"#fca5a5", margin:"6px 8px"}}>{err}</p>}
+      {cats.map((c) => (
+        <CarouselRow key={c.id} title={c.title} items={c.items || []} />
       ))}
     </div>
   );
 }
-
-export default ContentGrid;

@@ -1,0 +1,6 @@
+.home {
+  margin: 0 auto;
+  max-width: 1380px;       /* + ancho para 320px tiles */
+  padding: 20px 16px 48px;
+}
+@media (min-width: 1560px) { .home { max-width: 1520px; } }

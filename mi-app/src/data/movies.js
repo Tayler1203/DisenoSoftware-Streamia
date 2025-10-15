@@ -1,0 +1,61 @@
+// src/data/movies.js
+export const categories = [
+  {
+    id: "trending",
+    title: "Tendencias",
+    items: [
+      { id: "m1", title: "Neon Shadows", year: 2024, rating: 7.9, tags: ["Sci-Fi", "Acción"], 
+        poster: "https://images.unsplash.com/photo-1495567720989-cebdbdd97913?q=80&w=800&auto=format&fit=crop" },
+      { id: "m2", title: "Desierto Rojo", year: 2023, rating: 8.2, tags: ["Drama"], 
+        poster: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop" },
+      { id: "m3", title: "Ryder", year: 2022, rating: 7.1, tags: ["Aventura"], 
+        poster: "https://images.unsplash.com/photo-1502920917128-1aa500764ce7?q=80&w=800&auto=format&fit=crop" },
+      { id: "m4", title: "Afterglow", year: 2021, rating: 6.9, tags: ["Romance"], 
+        poster: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop" },
+      { id: "m5", title: "Terminal 12", year: 2024, rating: 7.6, tags: ["Thriller"], 
+        poster: "https://images.unsplash.com/photo-1517602302552-471fe67acf66?q=80&w=800&auto=format&fit=crop" },
+      { id: "m6", title: "Onda Corta", year: 2020, rating: 6.5, tags: ["Misterio"], 
+        poster: "https://images.unsplash.com/photo-1495567720989-cebdbdd97913?q=80&w=800&auto=format&fit=crop" },
+      { id: "m7", title: "El Último Faro", year: 2019, rating: 7.3, tags: ["Suspenso"], 
+        poster: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=800&auto=format&fit=crop" },
+      { id: "m8", title: "Punto de Quiebre", year: 2021, rating: 7.0, tags: ["Acción"], 
+        poster: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?q=80&w=800&auto=format&fit=crop" },
+    ],
+  },
+  {
+    id: "scifi",
+    title: "Ciencia Ficción",
+    items: [
+      { id: "m9", title: "Órbita 9", year: 2020, rating: 6.8, tags: ["Sci-Fi"], 
+        poster: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=800&auto=format&fit=crop" },
+      { id: "m10", title: "Eclipse", year: 2022, rating: 7.4, tags: ["Sci-Fi", "Drama"], 
+        poster: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop" },
+      { id: "m11", title: "Materia Oscura", year: 2023, rating: 7.7, tags: ["Sci-Fi", "Misterio"], 
+        poster: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop" },
+      { id: "m12", title: "Horizonte Cero", year: 2018, rating: 6.4, tags: ["Sci-Fi"], 
+        poster: "https://images.unsplash.com/photo-1504386106331-3e4e71712b38?q=80&w=800&auto=format&fit=crop" },
+      { id: "m13", title: "Cobalto", year: 2021, rating: 7.0, tags: ["Sci-Fi", "Acción"], 
+        poster: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=800&auto=format&fit=crop" },
+      { id: "m14", title: "Singularidad", year: 2019, rating: 6.9, tags: ["Sci-Fi"], 
+        poster: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" },
+    ],
+  },
+  {
+    id: "action",
+    title: "Acción",
+    items: [
+      { id: "m15", title: "Golpe Doble", year: 2022, rating: 7.2, tags: ["Acción"], 
+        poster: "https://images.unsplash.com/photo-1520975922284-9d68239add04?q=80&w=800&auto=format&fit=crop" },
+      { id: "m16", title: "Zona 8", year: 2021, rating: 6.7, tags: ["Acción", "Thriller"], 
+        poster: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800&auto=format&fit=crop" },
+      { id: "m17", title: "Vector", year: 2020, rating: 6.5, tags: ["Acción"], 
+        poster: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800&auto=format&fit=crop" },
+      { id: "m18", title: "Blindado", year: 2019, rating: 6.3, tags: ["Acción"], 
+        poster: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop" },
+      { id: "m19", title: "Operación Delta", year: 2024, rating: 7.8, tags: ["Acción"], 
+        poster: "https://images.unsplash.com/photo-1508898578281-774ac4893bd0?q=80&w=800&auto=format&fit=crop" },
+    ],
+  },
+];
+
+export default categories;

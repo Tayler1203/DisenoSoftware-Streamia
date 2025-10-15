@@ -1,0 +1,26 @@
+{
+  "categories": [
+    {
+      "id": "trending",
+      "title": "Tendencias",
+      "items": [
+        { "id": "m1", "title": "Neon Shadows", "year": 2024, "rating": 7.9, "tags": ["Sci-Fi","Acción"], "poster": "https://images.unsplash.com/photo-1495567720989-cebdbdd97913?q=80&w=800&auto=format&fit=crop" },
+        { "id": "m2", "title": "Desierto Rojo", "year": 2023, "rating": 8.2, "tags": ["Drama"], "poster": "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop" }
+      ]
+    },
+    {
+      "id": "scifi",
+      "title": "Ciencia Ficción",
+      "items": [
+        { "id": "m9", "title": "Órbita 9", "year": 2020, "rating": 6.8, "tags": ["Sci-Fi"], "poster": "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=800&auto=format&fit=crop" }
+      ]
+    },
+    {
+      "id": "action",
+      "title": "Acción",
+      "items": [
+        { "id": "m15", "title": "Golpe Doble", "year": 2022, "rating": 7.2, "tags": ["Acción"], "poster": "https://images.unsplash.com/photo-1520975922284-9d68239add04?q=80&w=800&auto=format&fit=crop" }
+      ]
+    }
+  ]
+}
