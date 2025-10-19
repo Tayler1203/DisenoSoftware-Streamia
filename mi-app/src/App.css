@@ -1,35 +1,108 @@
-/* Estilos globales */
-body {
+/* Estilos globales mejorados */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  background-color: #0d0d0d;
-  color: #f5f5f5;
+  padding: 0;
 }
 
-/* Fondo general de la app */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0a0a0f;
+  color: #f8fafc;
+  overflow-x: hidden;
+  cursor: none; /* Ocultar cursor por defecto para usar uno personalizado */
+}
+
+/* Cursor personalizado */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(139, 92, 246, 0.8);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: all 0.15s ease;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.custom-cursor-dot {
+  width: 4px;
+  height: 4px;
+  background: rgba(139, 92, 246, 1);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transition: all 0.1s ease;
+}
+
+/* Cursor trail effect */
+.cursor-trail {
+  width: 6px;
+  height: 6px;
+  background: rgba(139, 92, 246, 0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+/* Efecto hover en elementos interactivos */
+button:hover ~ .custom-cursor,
+a:hover ~ .custom-cursor,
+.movie-card:hover ~ .custom-cursor {
+  transform: scale(1.5);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, transparent 70%);
+}
+
+/* En móvil mostrar cursor normal */
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+  
+  .custom-cursor,
+  .custom-cursor-dot,
+  .cursor-trail {
+    display: none;
+  }
+}
+
+/* Fondo general de la app con diseño profesional */
 .app-container {
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
-  background-color: #0f172a; /* color base oscuro */
+  background: 
+    radial-gradient(ellipse at 10% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 50%),
+    linear-gradient(180deg, #0f172a 0%, #0a0a0f 100%);
   color: #f8fafc;
 }
 
-/* Capa difuminada con gradiente */
+/* Capa de textura sutil para profundidad */
 .app-container::before {
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 0;
-
-  /* Gradiente con 3 colores */
-  background: radial-gradient(at 20% 30%, #121212 0%, transparent 50%),
-              radial-gradient(at 80% 20%, #121212 0%, transparent 50%),
-              radial-gradient(at 60% 80%, #06B6D4 0%, transparent 50%);
-
-  /* Difuminado */
-  filter: blur(100px);
-  opacity: 0.4;
+  background-image: 
+    radial-gradient(circle at 25% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 50%, rgba(6, 182, 212, 0.03) 0%, transparent 50%);
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 /* Asegura que el contenido quede encima */
@@ -42,16 +115,101 @@ body {
 
 .main-content {
   flex: 1;
-  padding: 40px;
-  text-align: center;
+  padding: 40px 16px;
+  max-width: 1600px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+/* Hero section mejorado */
+.hero-section {
+  text-align: left;
+  margin-bottom: 48px;
+  padding: 0 32px;
 }
 
 .title {
-  font-size: 2rem;
-  margin-bottom: 10px;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
 }
 
 .subtitle {
-  color: #b3b3b3;
-  margin-bottom: 40px;
+  font-size: 1.15rem;
+  color: #94a3b8;
+  margin-bottom: 32px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Animación de fade-in para mejor experiencia */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main-content > * {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Mejoras de scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.5);
+}
+
+/* Utilidades de accesibilidad */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .main-content {
+    padding: 24px 8px;
+  }
+
+  .hero-section {
+    padding: 0 16px;
+  }
 }

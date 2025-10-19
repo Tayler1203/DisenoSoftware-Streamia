@@ -4,7 +4,7 @@ import { getCatalog } from "../lib/catalog";
 import VirtualKeyboard from "./VirtualKeyboard";
 import VoicePanel from "./VoicePanel";
 
-export default function Navbar() {
+export default function Navbar({ screenReaderEnabled, onToggleScreenReader }) {
   const [query, setQuery] = useState("");
   const [openPanel, setOpenPanel] = useState(false);  
   const [kbOpen, setKbOpen] = useState(false);        
@@ -13,6 +13,8 @@ export default function Navbar() {
   const [voiceOpen, setVoiceOpen] = useState(false);
   const [voiceStopTick, setVoiceStopTick] = useState(0);
   const stopAllVoice = () => setVoiceStopTick(t => t + 1);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef(null);
 
 
   const handleSearch = () => {
@@ -116,6 +118,20 @@ export default function Navbar() {
     closeKB();
   };
 
+  // Cerrar menú de perfil al hacer click fuera
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setProfileOpen(false);
+      }
+    };
+    
+    if (profileOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [profileOpen]);
+
   const menuItems = ["Inicio", "Series", "Películas", "Mi lista"];
 
   return (
@@ -125,6 +141,11 @@ export default function Navbar() {
            <div className={`brand ${(kbOpen || voiceOpen) ? "hide-when-search" : ""}`} aria-label="Streamia inicio">
             <div className={`brand ${kbOpen ? "hide-when-search" : ""}`} aria-label="Streamia inicio"></div>
             <span className="brand-emoji" aria-hidden="true">🎬</span> Streamia
+            {screenReaderEnabled && (
+              <span className="screen-reader-badge" title="Lector de pantalla activado">
+                🔊
+              </span>
+            )}
           </div>
 
           <ul className="nav-menu" role="menubar" aria-label="Secciones">
@@ -171,7 +192,89 @@ export default function Navbar() {
               )}
             </div>
 
-            <img className="avatar" src="https://i.pravatar.cc/40?img=5" alt="Perfil" width="36" height="36" />
+            <div className="profile-container" ref={profileRef}>
+              <button 
+                className="avatar-button" 
+                onClick={() => setProfileOpen(!profileOpen)}
+                aria-label="Menú de perfil"
+              >
+                <img 
+                  className="avatar" 
+                  src="https://i.pravatar.cc/40?img=5" 
+                  alt="Perfil" 
+                  width="36" 
+                  height="36" 
+                />
+                <span className={`avatar-arrow ${profileOpen ? 'open' : ''}`}>▼</span>
+              </button>
+
+              {profileOpen && (
+                <div className="profile-menu">
+                  <div className="profile-header">
+                    <img 
+                      className="profile-avatar-large" 
+                      src="https://i.pravatar.cc/80?img=5" 
+                      alt="Perfil" 
+                    />
+                    <div className="profile-info">
+                      <h4 className="profile-name">Usuario Premium</h4>
+                      <p className="profile-email">usuario@streamia.com</p>
+                    </div>
+                  </div>
+
+                  <div className="profile-divider"></div>
+
+                  <nav className="profile-nav">
+                    <button className="profile-item">
+                      <span className="profile-icon">👤</span>
+                      <span>Mi Perfil</span>
+                    </button>
+                    <button className="profile-item">
+                      <span className="profile-icon">⚙️</span>
+                      <span>Configuración</span>
+                    </button>
+                    <button className="profile-item">
+                      <span className="profile-icon">💳</span>
+                      <span>Suscripción</span>
+                    </button>
+                    <button className="profile-item">
+                      <span className="profile-icon">❤️</span>
+                      <span>Mi Lista</span>
+                    </button>
+                    <button className="profile-item">
+                      <span className="profile-icon">📊</span>
+                      <span>Historial</span>
+                    </button>
+                    
+                    <div className="profile-divider"></div>
+                    
+                    <button 
+                      className={`profile-item accessibility ${screenReaderEnabled ? 'active' : ''}`}
+                      onClick={onToggleScreenReader}
+                      aria-label={screenReaderEnabled ? 'Desactivar lector de pantalla' : 'Activar lector de pantalla'}
+                    >
+                      <span className="profile-icon">🔊</span>
+                      <span className="accessibility-label">
+                        Lector de Pantalla
+                        <span className="accessibility-status">
+                          {screenReaderEnabled ? 'Activado' : 'Desactivado'}
+                        </span>
+                      </span>
+                      <span className={`toggle-indicator ${screenReaderEnabled ? 'on' : 'off'}`}>
+                        {screenReaderEnabled ? '●' : '○'}
+                      </span>
+                    </button>
+                  </nav>
+
+                  <div className="profile-divider"></div>
+
+                  <button className="profile-item logout">
+                    <span className="profile-icon">🚪</span>
+                    <span>Cerrar Sesión</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
 
           {(kbOpen || voiceOpen) && (

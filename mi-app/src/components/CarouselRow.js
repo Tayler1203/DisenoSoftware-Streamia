@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import MovieCard from "./MovieCard";
 import "./CarouselRow.css";
 
-export default function CarouselRow({ title, items = [] }) {
+export default function CarouselRow({ title, items = [], onTheaterClick }) {
   const scrollerRef = useRef(null);
   const scrollBy = (d) => scrollerRef.current?.scrollBy({ left: d, behavior: "smooth" });
   const onKeyDown = (e) => {
@@ -28,7 +28,7 @@ export default function CarouselRow({ title, items = [] }) {
         >
           {items.map((it) => (
             <div key={it.id} role="listitem" className="row-item">
-              <MovieCard item={it} />
+              <MovieCard item={it} onTheaterClick={onTheaterClick} />
             </div>
           ))}
         </div>

@@ -9,6 +9,19 @@
       ]
     },
     {
+      "id": "winter",
+      "title": "Temporada de Invierno",
+      "items": [
+        { "id": "w1", "title": "Frozen Mountains", "year": 2024, "rating": 8.5, "tags": ["Aventura", "Drama"], "poster": "https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?q=80&w=800&auto=format&fit=crop" },
+        { "id": "w2", "title": "Winter's Tale", "year": 2023, "rating": 7.8, "tags": ["Romance", "Fantasía"], "poster": "https://images.unsplash.com/photo-1491002052546-bf38f186af56?q=80&w=800&auto=format&fit=crop" },
+        { "id": "w3", "title": "Ice Kingdom", "year": 2024, "rating": 8.1, "tags": ["Fantasía", "Aventura"], "poster": "https://images.unsplash.com/photo-1478359844494-1092259d93e4?q=80&w=800&auto=format&fit=crop" },
+        { "id": "w4", "title": "Snow Storm", "year": 2023, "rating": 7.5, "tags": ["Thriller", "Suspenso"], "poster": "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?q=80&w=800&auto=format&fit=crop" },
+        { "id": "w5", "title": "Arctic Expedition", "year": 2024, "rating": 8.3, "tags": ["Documental", "Aventura"], "poster": "https://images.unsplash.com/photo-1484313544103-37cee1c2b8d9?q=80&w=800&auto=format&fit=crop" },
+        { "id": "w6", "title": "Christmas Miracle", "year": 2023, "rating": 7.2, "tags": ["Comedia", "Familiar"], "poster": "https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=800&auto=format&fit=crop" },
+        { "id": "w7", "title": "Polar Nights", "year": 2024, "rating": 8.0, "tags": ["Drama", "Misterio"], "poster": "https://images.unsplash.com/photo-1476820865390-c52aeebb9891?q=80&w=800&auto=format&fit=crop" }
+      ]
+    },
+    {
       "id": "scifi",
       "title": "Ciencia Ficción",
       "items": [
